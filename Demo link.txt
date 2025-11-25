@@ -1,0 +1,7 @@
+Demo link:
+
+https://drive.google.com/drive/folders/1IWi1YlxaZWSNAuCv2JMXZutNToNooVBa?usp=drive_link
+
+Dataset:
+
+https://www.kaggle.com/datasets/anshulm257/rice-disease-dataset
