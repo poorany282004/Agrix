@@ -1,0 +1,11 @@
+{
+  "blast": 0,
+  "brown_spot": 1,
+  "bacterial_blight": 2,
+  "sheath_blight": 3,
+  "tungro": 4,
+  "healthy": 5,
+  "leaf_blast":6,
+  "leaf_scald":7,
+  "narrow_brown_spot":8
+}
