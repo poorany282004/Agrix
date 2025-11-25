@@ -1,0 +1,186 @@
+// app.js — Agrix frontend behavior
+// If backend is on different origin, set API_BASE to that origin, e.g. 'http://localhost:8000'
+const API_BASE = ''; // same origin by default
+
+// Elements
+const video = document.getElementById('video');
+const previewImg = document.getElementById('previewImg');
+const canvas = document.getElementById('canvas');
+const fileInput = document.getElementById('fileInput');
+const btnCapture = document.getElementById('btnCapture');
+const btnChoose = document.getElementById('btnChoose');
+const btnClear = document.getElementById('btnClear');
+const submitBtn = document.getElementById('submitBtn');
+const scanBtn = document.getElementById('scanBtn');
+const statusDiv = document.getElementById('status');
+
+const diseaseLabel = document.getElementById('diseaseLabel');
+const diseaseConf = document.getElementById('diseaseConf');
+const diseaseSeverity = document.getElementById('diseaseSeverity');
+const advisoryText = document.getElementById('advisoryText');
+const saliencyWrap = document.getElementById('saliencyWrap');
+const saliencyImg = document.getElementById('saliencyImg');
+const resultCard = document.getElementById('resultCard');
+
+const sendFeedback = document.getElementById('sendFeedback');
+const correction = document.getElementById('correction');
+
+let currentBlob = null;
+let lastJobId = null;
+
+// Start camera if available
+async function startCamera() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'environment' },
+      audio: false
+    });
+    video.srcObject = stream;
+    video.play();
+  } catch (err) {
+    console.warn('Camera not available:', err);
+    video.style.display = 'none';
+  }
+}
+startCamera();
+
+// Capture from camera
+btnCapture.addEventListener('click', () => {
+  if (!video || !video.srcObject) return alert('Camera not available');
+  const w = video.videoWidth, h = video.videoHeight;
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(video, 0, 0, w, h);
+  canvas.toBlob(blob => {
+    currentBlob = blob;
+    previewImg.src = URL.createObjectURL(blob);
+    statusDiv.textContent = 'Photo captured';
+    resultCard.style.display = 'none';
+  }, 'image/jpeg', 0.92);
+});
+
+// Choose file fallback
+btnChoose.addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  currentBlob = f;
+  previewImg.src = URL.createObjectURL(f);
+  statusDiv.textContent = 'File selected';
+  resultCard.style.display = 'none';
+});
+
+// Clear current image
+btnClear.addEventListener('click', () => {
+  currentBlob = null;
+  previewImg.src = '';
+  statusDiv.textContent = 'Cleared';
+  resultCard.style.display = 'none';
+});
+
+// Quick scan
+scanBtn.addEventListener('click', () => submitBtn.click());
+
+// Submit to backend
+submitBtn.addEventListener('click', async () => {
+  if (!currentBlob) return alert('Please capture or choose an image first.');
+
+  const rh24 = document.getElementById('rh24').value;
+  const temp48 = document.getElementById('temp48').value;
+  const soil_moisture = document.getElementById('soil_moisture').value;
+  const recent_rain = document.getElementById('recent_rain').value || 0;
+
+  const fd = new FormData();
+  fd.append('image', currentBlob, 'leaf.jpg');
+  if (rh24) fd.append('rh24', rh24);
+  if (temp48) fd.append('temp48', temp48);
+  if (soil_moisture) fd.append('soil_moisture', soil_moisture);
+  fd.append('recent_rain', recent_rain);
+
+  statusDiv.textContent = 'Uploading...';
+  submitBtn.disabled = true;
+
+  try {
+    const res = await fetch(`${API_BASE}/api/v1/upload`, { method: 'POST', body: fd });
+    if (!res.ok) throw new Error(`Upload failed (${res.status})`);
+    const j = await res.json();
+    lastJobId = j.job_id;
+    statusDiv.textContent = 'Processing...';
+    // Poll for result
+    const out = await pollResult(lastJobId, 2500, 30);
+    if (out) {
+      showResult(out);
+    } else {
+      statusDiv.textContent = 'Timed out, try again later.';
+    }
+  } catch (err) {
+    console.error(err);
+    statusDiv.textContent = 'Error: ' + (err.message || err);
+    // Optionally queue local retry
+    enqueueFailedUpload(currentBlob, { rh24, temp48, soil_moisture, recent_rain });
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+
+async function pollResult(jobId, interval = 2000, maxTries = 20) {
+  for (let i = 0; i < maxTries; i++) {
+    await sleep(interval);
+    try {
+      const r = await fetch(`${API_BASE}/api/v1/result/${jobId}`);
+      if (r.status === 200) {
+        return await r.json();
+      }
+    } catch (err) {
+      console.warn('poll error', err);
+    }
+  }
+  return null;
+}
+
+function showResult(out) {
+  diseaseLabel.textContent = out.disease || 'unknown';
+  diseaseConf.textContent = out.confidence ? (out.confidence * 100).toFixed(1) + '%' : 'N/A';
+  diseaseSeverity.textContent = out.severity || 'N/A';
+  advisoryText.textContent = out.advisory || '—';
+  if (out.saliency_url) {
+    saliencyWrap.style.display = 'block';
+    saliencyImg.src = out.saliency_url;
+  } else {
+    saliencyWrap.style.display = 'none';
+  }
+  resultCard.style.display = 'block';
+  statusDiv.textContent = 'Result ready';
+}
+
+// Feedback send
+sendFeedback.addEventListener('click', async () => {
+  const corr = correction.value;
+  if (!corr) return alert('Select a correction label first.');
+  if (!lastJobId) return alert('No job to attach feedback to.');
+  const payload = { corrected_label: corr, ts: new Date().toISOString() };
+  try {
+    const r = await fetch(`${API_BASE}/api/v1/feedback/${lastJobId}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+    });
+    if (r.ok) alert('Thanks — feedback submitted.');
+    else alert('Feedback failed.');
+  } catch (e) {
+    alert('Feedback error: ' + e.message);
+  }
+});
+
+// Simple local retry queue (basic)
+function enqueueFailedUpload(blob, sensors) {
+  try {
+    const q = JSON.parse(localStorage.getItem('agrix_upload_queue') || '[]');
+    q.push({ ts: Date.now(), sensors });
+    localStorage.setItem('agrix_upload_queue', JSON.stringify(q));
+    statusDiv.textContent = 'Upload queued locally (will retry when online).';
+  } catch (e) {
+    console.warn('Queue failed', e);
+  }
+}
+
+// helpers
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
