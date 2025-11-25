@@ -1,0 +1,90 @@
+{
+  "healthy": {
+    "title": "Healthy 🌱",
+    "summary": "No visible disease signs. Continue regular monitoring.",
+    "actions": [
+      "Monitor every 3–5 days.",
+      "Maintain balanced irrigation and remove debris.",
+      "Use recommended fertilizers and avoid overwatering."
+    ]
+  },
+  "blast": {
+    "title": "Rice Blast",
+    "summary": "Fungal disease likely. Early treatment recommended.",
+    "actions": [
+      "Remove affected leaves and burn or discard them safely.",
+      "Apply fungicide (e.g., Tricyclazole) according to label and local advice.",
+      "Avoid excessive nitrogen fertilizer; improve drainage."
+    ]
+  },
+  "brownspot": {
+    "title": "Brown Spot",
+    "summary": "Spot symptoms observed on leaves.",
+    "actions": [
+      "Use crop rotation and resistant varieties.",
+      "Apply copper fungicides if recommended locally."
+    ]
+  },
+  "leaf_blast": {
+    "title": "Leaf Blast",
+    "summary": "Typical lesions observed on leaves due to Pyricularia oryzae fungus.",
+    "actions": [
+      "Spray Tricyclazole 0.6 g/L water or similar fungicide.",
+      "Avoid overwatering and maintain proper field drainage.",
+      "Use resistant rice varieties if available."
+    ]
+  },
+  "leaf_scald": {
+    "title": "Leaf Scald",
+    "summary": "Scald-like lesions observed, possibly caused by Rhynchosporium oryzae.",
+    "actions": [
+      "Ensure proper nitrogen management.",
+      "Avoid dense planting; increase air circulation.",
+      "Apply recommended fungicides if infection spreads."
+    ]
+  },
+  "narrow_brown_spot": {
+    "title": "Narrow Brown Spot",
+    "summary": "Narrow brown lesions appearing under humid conditions.",
+    "actions": [
+      "Use resistant varieties.",
+      "Avoid excessive nitrogen and moisture stress.",
+      "Apply Mancozeb or Carbendazim if symptoms increase."
+    ]
+  },
+  "sheath_blight": {
+    "title": "Sheath Blight",
+    "summary": "Fungal disease causing lesions on leaf sheaths.",
+    "actions": [
+      "Reduce plant density and avoid high nitrogen.",
+      "Apply Validamycin (2 ml/L) or Carbendazim if recommended.",
+      "Remove infected plant debris after harvest."
+    ]
+  },
+  "bacterialblight": {
+    "title": "Bacterial Blight",
+    "summary": "Caused by Xanthomonas oryzae; water-soaked streaks appear.",
+    "actions": [
+      "Avoid field-to-field water flow from infected areas.",
+      "Spray Copper-based bactericides as per advice.",
+      "Use resistant rice varieties (e.g., IRBB series)."
+    ]
+  },
+  "tungro": {
+    "title": "Tungro Virus Disease",
+    "summary": "Viral infection transmitted by green leafhoppers.",
+    "actions": [
+      "Remove infected plants immediately.",
+      "Control leafhoppers using recommended insecticides.",
+      "Plant resistant varieties and avoid overlapping crops."
+    ]
+  },
+  "default": {
+    "title": "General Advisory",
+    "summary": "Follow integrated pest management (IPM) practices.",
+    "actions": [
+      "Seek local agricultural extension support for confirmation.",
+      "Monitor microclimate and implement cultural controls."
+    ]
+  }
+}

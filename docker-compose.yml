@@ -1,0 +1,14 @@
+# agrix/docker-compose.yml
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app
+      - ./backend/models:/app/models
+      - ./dataset:/app/../dataset
+    environment:
+      - PYTHONUNBUFFERED=1
