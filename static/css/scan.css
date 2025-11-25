@@ -1,0 +1,181 @@
+/* Remove default margin */
+body {
+    margin: 0;
+    background: #e8f4eb;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+/* 🎥 Background Video */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.60;
+    z-index: -3;
+}
+
+/* 🌾 Floating Leaves */
+.leaf {
+    position: fixed;
+    width: 130px;
+    opacity: 0.3;
+    animation: float 12s infinite linear;
+    z-index: -1;
+}
+
+.leaf1 { top: 10%; left: 5%; animation-duration: 14s; }
+.leaf2 { top: 40%; right: 5%; animation-duration: 18s; }
+.leaf3 { bottom: 10%; left: 50%; animation-duration: 20s; }
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0); }
+    100% { transform: translateY(60px) rotate(15deg); }
+}
+
+/* 🌱 Main container */
+.scan-container {
+    padding: 30px;
+    text-align: center;
+}
+
+/* 🔙 Back button */
+.back-btn {
+    font-size: 1.2rem;
+    color: #084a2a;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Titles */
+.scan-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #063a20;
+}
+
+.scan-sub {
+    color: #195c35;
+    margin-bottom: 30px;
+}
+
+/* Camera Box */
+.camera-box {
+    width: 90%;
+    max-width: 450px;
+    height: 280px;
+    background: #000;
+    border-radius: 18px;
+    margin: auto;
+    overflow: hidden;
+    display: none;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.capture-btn {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 26px;
+    background: #0d4d22;
+    color: white;
+    border-radius: 25px;
+    border: none;
+}
+
+/* Scan Buttons */
+.scan-btn {
+    background: #0c542b;
+    color: white;
+    padding: 16px;
+    width: 90%;
+    max-width: 320px;
+    margin: 14px auto;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 70, 30, 0.25);
+    transition: 0.3s;
+}
+
+.scan-btn:hover {
+    background: #0e6a37;
+    transform: scale(1.03);
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* Upload Input Hidden */
+.upload-btn input {
+    display: none;
+}
+
+/* Preview Thumbnails */
+.preview-area {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.preview-area img,
+.preview-area video {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+}
+
+/* Submit Button */
+.submit-btn {
+    margin-top: 30px;
+    padding: 16px 40px;
+    background: #06451d;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 8px 25px rgba(0, 60, 20, 0.4);
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: #0b6e33;
+}
+
+/* Glowing pulse animation */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0px rgba(0,128,0,0.3); }
+    100% { box-shadow: 0 0 20px rgba(0,128,0,0.5); }
+}
+
+/* Animations */
+.fade-in { animation: fade 2s forwards; opacity: 0; }
+.fade-in-delay { animation: fade 2s 0.5s forwards; opacity: 0; }
+.slide-up { animation: slideUp 1.3s forwards; opacity: 0; }
+
+@keyframes fade { to { opacity: 1; } }
+@keyframes slideUp {
+    to { opacity: 1; transform: translateY(0); }
+}
