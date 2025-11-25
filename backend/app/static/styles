@@ -1,0 +1,51 @@
+/* styles.css — Agrix UI styles (responsive, modern) */
+:root{
+  --accent:#0b7cff;
+  --accent-2:#2bbd7e;
+  --bg:#f5f8fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --radius:12px;
+  --gap:14px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,#f8fbff,#f5f8fb);color:#0f1724;-webkit-font-smoothing:antialiased}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff}
+.brand{display:flex;flex-direction:column}
+.logo{font-weight:700;font-size:1.15rem}
+.tagline{opacity:0.95;font-size:0.85rem}
+.btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);background:#fff;color:var(--accent);cursor:pointer}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.12);color:#fff}
+.btn.primary{background:#fff;color:var(--accent);border:none;font-weight:600}
+.large{padding:12px 16px;font-size:1rem}
+.main{display:flex;gap:18px;max-width:1100px;margin:22px auto;padding:0 16px}
+.left{flex:1.2}
+.right{width:360px}
+.card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 8px 28px rgba(12,18,30,0.06);margin-bottom:16px}
+.card-header h2{margin:0}
+.hint{color:var(--muted);font-size:0.95rem;margin-top:6px}
+.capture-area{position:relative;border-radius:10px;overflow:hidden;background:#eef6ff;display:flex;align-items:center;justify-content:center;min-height:240px}
+video, img{width:100%;height:100%;object-fit:cover;display:block;max-height:360px}
+.controls{display:flex;gap:10px;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.grid label{display:flex;flex-direction:column;font-size:0.95rem}
+.grid input, .grid select{padding:8px;border-radius:8px;border:1px solid #e9f3ff}
+.actions{display:flex;align-items:center;gap:12px}
+.status{color:var(--muted);font-size:0.95rem}
+.result .result-row{margin:8px 0;font-size:0.96rem}
+.advisory{background:#fbfcff;padding:10px;border-radius:8px;border:1px solid #eef4ff;margin-top:6px}
+.feedback{display:flex;gap:8px;align-items:center;margin-top:12px}
+.tips ul{margin:8px 0 0 18px;color:var(--muted)}
+.footer{max-width:1100px;margin:12px auto;padding:8px 16px;color:var(--muted);font-size:0.9rem}
+
+/* saliency */
+.saliency img{width:100%;border-radius:8px;border:1px solid #eef4ff;margin-top:8px}
+
+/* responsive */
+@media (max-width:1000px){
+  .main{flex-direction:column;padding:12px}
+  .right{width:auto}
+  .grid{grid-template-columns:1fr}
+}
