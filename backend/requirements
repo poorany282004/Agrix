@@ -1,0 +1,21 @@
+# FastAPI web framework
+fastapi==0.111.1
+
+# Uvicorn server
+uvicorn[standard]==0.23.2
+
+# Handle multipart/form-data uploads
+python-multipart==0.0.6
+
+# Image processing
+Pillow==10.2.0
+
+# PyTorch CPU version (adjust if using GPU)
+torch==2.1.0
+torchvision==0.16.0
+
+# Optional: for progress bars / utilities (training scripts)
+tqdm==4.66.1
+
+# Optional: if you plan Grad-CAM later
+# pytorch-grad-cam==1.5.1
