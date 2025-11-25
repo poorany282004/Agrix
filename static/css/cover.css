@@ -1,0 +1,206 @@
+/* Remove margin */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+/* 🌾 FULL SCREEN VIDEO */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    filter: brightness(80%);
+}
+
+/* 🌱 Logo (Top-left) */
+.header {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    z-index: 10;
+}
+
+.logo {
+    height: 180px;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+/* 🧠 Hero Content */
+.hero {
+    position: absolute;
+    top: 32%;
+    left: 8%;
+    color: white;
+    max-width: 600px;
+}
+
+.title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+    text-shadow: 0 4px 14px rgba(0,0,0,0.6);
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    margin-top: 12px;
+    max-width: 480px;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* CTA Button */
+.cta-btn {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 15px 34px;
+    background-color: #064a2d;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 1.15rem;
+    transition: 0.3s;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+}
+
+.cta-btn:hover {
+    background-color: #0c7a3a;
+    transform: translateY(-4px);
+}
+
+/* 🌾 Disease Section */
+.disease-section {
+    margin-top: 85vh;
+    padding: 50px 5%;
+    background: white;
+    color: #145a2a;
+    border-radius: 30px 30px 0 0;
+    box-shadow: 0 -6px 20px rgba(0,0,0,0.15);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+/* 🟩 Disease Grid */
+.disease-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+/* 🟩 Disease Card Container */
+.disease-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.disease-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.2);
+}
+
+/* 🖼 Perfect Equal Image Size */
+.img-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 18px 18px 0 0;
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .45s ease;
+}
+
+.disease-card:hover img {
+    transform: scale(1.12);
+}
+
+/* Card Text Content */
+.card-content {
+    padding: 15px 20px;
+}
+
+.card-content h3 {
+    margin: 0;
+    color: #0f4c1a;
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+
+.card-content p {
+    margin: 7px 0 0;
+    color: #3b6c44;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* 🔷 Fade / Slide Animations */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+.fade-in-delay {
+    opacity: 0;
+    animation: fadeIn 2s 0.6s forwards;
+}
+
+.slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 1.5s 1s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 📱 Mobile Responsive */
+@media (max-width: 768px) {
+
+    .logo {
+        height: 80px;
+    }
+
+    .hero {
+        top: 26%;
+        left: 5%;
+    }
+
+    .title {
+        font-size: 2.2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .img-wrapper {
+        height: 150px;
+    }
+}
