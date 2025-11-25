@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Crop – Agrix</title>
+    <link rel="stylesheet" href="static/css/scan.css">
+</head>
+
+<body>
+
+<!-- 🌾 Background Decorative Video -->
+<video autoplay muted loop id="bg-video">
+    <source src="static/videos/rice_bg.mp4" type="video/mp4">
+</video>
+
+<!-- 🌾 Floating Leaves Decoration -->
+<img src="leaf1.png" class="leaf leaf1">
+<img src="leaf2.png" class="leaf leaf2">
+<img src="leaf3.png" class="leaf leaf3">
+
+<div class="scan-container">
+
+    <!-- 🔙 Back Button -->
+    <a href="/" class="back-btn">⟵ Back</a>
+
+    <!-- Title -->
+    <h1 class="scan-title fade-in">Scan Your Rice Crop</h1>
+    <p class="scan-sub fade-in-delay">Upload images or use your camera to detect diseases instantly.</p>
+
+    <!-- Camera Box -->
+    <div class="camera-box" id="cameraBox" style="display:none;">
+        <video id="cameraPreview" autoplay></video>
+        <button class="capture-btn" id="captureBtn">📸 Capture</button>
+    </div>
+
+    <!-- Option Buttons -->
+    <div class="scan-options slide-up">
+
+        <!-- Camera -->
+        <button id="cameraBtn" class="scan-btn">
+            <img src="static/images/camera_icon.png" class="icon"> Use Camera
+        </button>
+
+        <!-- Upload -->
+        <label class="scan-btn upload-btn">
+            <img src="static/images/upload_icon.png" class="icon"> Upload Images
+            <input type="file" id="fileInput" accept="image/*" multiple>
+        </label>
+
+    </div>
+
+    <!-- Preview Thumbnails -->
+    <div id="previewArea" class="preview-area"></div>
+
+    <!-- Submit -->
+    <button id="submitBtn" class="submit-btn pulse">🔍 Detect Disease</button>
+
+</div>
+
+<script src="static/js/scan.js"></script>
+</body>
+</html>

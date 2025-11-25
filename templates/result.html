@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrix – Detection Result</title>
+    <link rel="stylesheet" href="static/css/result.css">
+</head>
+
+<body>
+
+<!-- 🔙 Back & Share -->
+<div class="top-bar">
+    <a href="/scan" class="icon-btn back-btn">⟵</a>
+    <button class="icon-btn share-btn" onclick="shareResult()">⤴</button>
+</div>
+
+<!-- 🌿 MAIN RESULT WRAPPER -->
+<div class="result-container fade-in">
+
+    <!-- 🖼 DETECTED IMAGE -->
+    <div class="image-box">
+        <img src="{{ image_url }}" alt="Detected Crop Image">
+    </div>
+
+    <!-- 🌱 DISEASE TITLE -->
+    <h1 class="disease-name">{{ disease_name }}</h1>
+
+    <!-- 🟩 STAGE -->
+    <div class="stage-box">{{ stage }}</div>
+
+    <!-- 📝 ABOUT -->
+    <section class="section">
+        <h2>About</h2>
+        <p>{{ description }}</p>
+    </section>
+
+    <!-- 🌿 SYMPTOMS -->
+    <section class="section">
+        <h2>Symptoms</h2>
+        <ul class="bullet-list">
+            {% for s in symptoms %}
+            <li>{{ s }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!-- 💡 PREVENTION -->
+    <section class="section">
+        <h2>Prevention</h2>
+        <ul class="bullet-list">
+            {% for p in prevention %}
+            <li>{{ p }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!-- 🔁 ACTION BUTTONS -->
+    <div class="action-buttons">
+        <a href="/scan" class="btn scan-btn">Scan Again</a>
+        <a href="/" class="btn home-btn">Go to Home</a>
+    </div>
+
+</div>
+
+<script>
+function shareResult() {
+    if (navigator.share) {
+        navigator.share({
+            title: "Agrix Result",
+            text: "Crop disease detection result",
+            url: window.location.href
+        });
+    } else {
+        alert("Sharing not supported on this device.");
+    }
+}
+</script>
+
+</body>
+</html>
